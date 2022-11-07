@@ -1,16 +1,23 @@
 const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
-// const request = require('supertest');
-// const app = require('../lib/app');
+const request = require('supertest');
+const app = require('../lib/app');
 
-describe('backend-express-template routes', () => {
+describe('author routes', () => {
   beforeEach(() => {
     return setup(pool);
+  })
+  it('GET /authors should return the list of authors', async () => {
+    const resp = await request(app).get('/authors');
+    expect(resp.status).toBe(200);
+    expect(resp.body.length).toBe(5);
+    expect(resp.body[0]).toEqual({
+      id: expect.any(String),
+      name: expect.any(String),
+    });
   });
-  it('example test - delete me!', () => {
-    expect(1).toEqual(1);
+
   });
   afterAll(() => {
     pool.end();
   });
-});
