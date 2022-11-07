@@ -16,8 +16,24 @@ describe('author routes', () => {
       name: expect.any(String),
     });
   });
+});
 
+describe('book routes', () => {
+  beforeEach(() => {
+    return setup(pool);
+  })
+  it('GET /books should return the list of books', async () => {
+    const resp = await request(app).get('/books');
+    expect(resp.status).toBe(200);
+    expect(resp.body.length).toBe(9);
+    expect(resp.body[0]).toEqual({
+      id: expect.any(String),
+      title: expect.any(String),
+      released: expect.any(String),
+    });
   });
+});
+
   afterAll(() => {
     pool.end();
   });
