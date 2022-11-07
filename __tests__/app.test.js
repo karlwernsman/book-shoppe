@@ -29,7 +29,7 @@ describe('book routes', () => {
     expect(resp.body[0]).toEqual({
       id: expect.any(String),
       title: expect.any(String),
-      released: expect.any(String),
+      released: expect.any(Number),
     });
   });
 });
