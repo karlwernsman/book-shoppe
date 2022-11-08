@@ -14,8 +14,20 @@ describe('author routes', () => {
     expect(resp.body[0]).toEqual({
       id: expect.any(String),
       name: expect.any(String),
-    });
-  });
+    })
+  })
+  it.only('GET /authors:id should return an author and their books', async () => {
+    const resp = await request(app).get('/authors/1');
+    console.log(resp.body);
+    expect(resp.status).toBe(200);
+    expect(resp.body).toEqual({
+      id: expect.any(String),
+      name: expect.any(String),
+      dob: expect.any(String),
+      pob: expect.any(String),
+      books: [{id: expect.any(Number), title: expect.any(String), released: expect.any(Number)}],
+  })
+})
 });
 
 describe('book routes', () => {
@@ -32,8 +44,7 @@ describe('book routes', () => {
       released: expect.any(Number),
     });
   });
-});
-
   afterAll(() => {
     pool.end();
   });
+});
