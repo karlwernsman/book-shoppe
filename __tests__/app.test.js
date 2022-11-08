@@ -41,8 +41,18 @@ describe('book routes', () => {
       id: expect.any(String),
       title: expect.any(String),
       released: expect.any(Number),
-    });
-  });
+    })
+  })
+  it('GET /books:id should return a book and the author', async () => {
+    const resp = await request(app).get('/books/1');
+    expect(resp.status).toBe(200);
+    expect(resp.body).toEqual({
+      title: expect.any(String),
+      released: expect.any(Number),
+      authors: [{id: expect.any(Number), name: expect.any(String)}],
+  })
+})
+
   afterAll(() => {
     pool.end();
   });
