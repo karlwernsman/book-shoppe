@@ -16,7 +16,7 @@ describe('author routes', () => {
       name: expect.any(String),
     })
   })
-  it.only('GET /authors:id should return an author and their books', async () => {
+  it('GET /authors:id should return an author and their books', async () => {
     const resp = await request(app).get('/authors/1');
     console.log(resp.body);
     expect(resp.status).toBe(200);
